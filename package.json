@@ -24,6 +24,7 @@
     "cognitive-services": "^1.2.3",
     "connect-mongodb-session": "^2.2.0",
     "dotenv": "^8.1.0",
+    "ejs": "^2.7.1",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.16.2",
@@ -32,11 +33,15 @@
     "mongoose": "^5.7.1",
     "morgan": "^1.9.1",
     "node-nlp": "^3.9.0",
+    "retext": "^7.0.0",
+    "retext-keywords": "^5.0.0",
+    "retext-pos": "^2.0.2",
     "to-vfile": "^6.0.0",
     "typescript": "^3.6.3"
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.1",
+    "@types/ejs": "^2.6.3",
     "@types/express": "^4.17.1",
     "@types/express-handlebars": "0.0.33",
     "@types/express-session": "^1.15.14",

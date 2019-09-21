@@ -28,7 +28,7 @@ app.engine(
 	})
 );
 
-app.set("view engine", "hbs");
+app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
 app.use(logger("dev"));
@@ -51,4 +51,5 @@ app.listen(4500, () => {
     console.log('Caption app listening on port 4500!')
   });
 
-app.use('/caption', captionRoute);
+app.use('/', captionRoute);
+// app.use('/caption', captionRoute);

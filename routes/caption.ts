@@ -14,6 +14,10 @@ var toString = require("nlcst-to-string");
 const router = Router();
 export default router;
 
+router.get("/", (req, res) => {
+    res.render("index");
+});
+
 router.post("/", async (req, res) => {
 	const transcript = req.body.transcipt;
 	//{
