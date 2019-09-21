@@ -1,5 +1,7 @@
 import { Router } from "express";
 import mongoose from "mongoose";
+var limdu = require('limdu');
+const { BrainNLU } = require("node-nlp");
 
 //Extract Keywords
 var vfile = require("to-vfile");
@@ -15,8 +17,6 @@ router.post("/", async (req, res) => {
 	const transcript = req.body.transcipt;
 	const url = req.body.url;
 	const userData = req.body.userData;
-
-	const { BrainNLU } = require("node-nlp");
 
 	async function wordChoose() {
 		const classifier = new BrainNLU({ language: "fr" });
