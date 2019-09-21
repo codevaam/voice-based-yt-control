@@ -71,9 +71,17 @@
                 interimTranscript += transcript;
                 }
                 finalTranscript += ' '
+
                 $.ajax({
                     method: "GET",
-                    url: "/caption"
+                    url: "/caption",
+                    data: {
+                        transcript: finalTranscript,
+                        videoId: vId
+                    },
+                    success: data=>{
+                        console.log(data);
+                    }   
                 })
             }            
         }
