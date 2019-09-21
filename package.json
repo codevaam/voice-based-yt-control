@@ -1,0 +1,47 @@
+{
+  "name": "video-caption",
+  "version": "1.0.0",
+  "description": "Give Real time caption jump for the video",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.ts",
+    "build": "cp -r ./static ./dist/ && cp -r ./views ./dist/ && tsc -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devamtrivedi/VIThack-phosphorus.git"
+  },
+  "author": "Saurav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devamtrivedi/VIThack-phosphorus/issues"
+  },
+  "homepage": "https://github.com/devamtrivedi/VIThack-phosphorus#readme",
+  "dependencies": {
+    "@google-cloud/speech": "^3.3.0",
+    "async": "^3.1.0",
+    "bingspeech-api-client": "^2.5.1",
+    "cognitive-services": "^1.2.3",
+    "connect-mongodb-session": "^2.2.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.16.2",
+    "limdu": "^0.9.4",
+    "microsoft-cognitiveservices-speech-sdk": "^1.6.0",
+    "mongoose": "^5.7.1",
+    "morgan": "^1.9.1",
+    "typescript": "^3.6.3"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.1",
+    "@types/express": "^4.17.1",
+    "@types/express-handlebars": "0.0.33",
+    "@types/express-session": "^1.15.14",
+    "@types/request-promise": "^4.1.44",
+    "nodemon": "^1.19.2",
+    "request": "^2.88.0",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0"
+  }
+}

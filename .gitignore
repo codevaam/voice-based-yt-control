@@ -1,2 +1,5 @@
 Lecture_Video_Fragmentation_Dataset
 Lecture_Video_Fragmentation_Dataset.zip
+./vscode
+node_modules
+.env

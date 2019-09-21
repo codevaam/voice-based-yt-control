@@ -1,5 +1,6 @@
 ## Devam Frontend
 ### Send me this, should be VIDEOID
+
 <script type="text/javascript">
 function youtube_parser(url){
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
