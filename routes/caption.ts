@@ -1,8 +1,12 @@
 import { Router } from "express";
 import mongoose from "mongoose";
+// import { url } from "inspector";
+// import { exec } from "child_process";
 var limdu = require("limdu");
 const { spawn } = require("child_process");
 const { BrainNLU } = require("node-nlp");
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
 //Extract Keywords
 var vfile = require("to-vfile");
@@ -17,30 +21,21 @@ export default router;
 router.get("/", (req, res) => {
     res.render("index.html");
 });
+var url;
+router.get("/id", async (req, res)=>{
+	const id = req.query.url;
+	const transcript = await get_transcript_py(id);
+	res.json(transcript);
+})
+
 
 router.get("/caption", async (req, res) => {
-    const url = req.body.url;
+    url = req.query.url;
     console.log(typeof(url));
-    const transcript = get_transcript_py(url);
-    console.log(transcript);
-	//{
-	//     duration:
-	//     text:
-	//     start:
-	// // }
-    const userData = req.body.userData;
-    
-
-
-	
 });
-
-function get_transcript_py(url) {
-    const pyProg = spawn("python", ['./script.py', url]);
-    pyProg.strout.on('data', function(data) {
-        console.log(data.toString());
-        return data.toString();
-    });
+async function get_transcript_py(url){
+	const {stdout,stderr} = await exec('python ./routes/script.py '+url);
+	return stdout;
 }
 
 async function get_label_list_2(transcriptAndKeys, userData: string) {
