@@ -19,16 +19,9 @@ export const connect = mongoose.connect(mongo_uri, { useNewUrlParser: true, useU
 
 app.use("/static", express.static("static"));
 // Use `.hbs` for extensions and find partials in `views/partials`.
-app.engine(
-	"hbs",
-	hbs({
-		extname: "hbs",
-		layoutsDir: __dirname + "/views",
-		partialsDir: __dirname + "/views/partials"
-	})
-);
+app.engine("html", require('ejs').renderFile);
 
-app.set("view engine", "ejs");
+app.set("view engine", "html");
 app.set("views", __dirname + "/views");
 
 app.use(logger("dev"));

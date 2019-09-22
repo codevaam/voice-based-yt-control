@@ -4,14 +4,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-      var player;
+      var player,vId="O9e-bh1PI3M";
       $(document).on("click", ".play-button", function(){
           var input = $(".link-input").val();
           var vId = input.split("=")[1];
@@ -64,7 +62,7 @@
             let interimTranscript = '';
             for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
                 let transcript = event.results[i][0].transcript;
-                // finalresult.push(transcript);
+                console.log(transcript);
                 if (event.results[i] !== "") {
                 finalTranscript += transcript;
                 finalresult.push(transcript);
@@ -72,8 +70,17 @@
                 interimTranscript += transcript;
                 }
                 finalTranscript += ' '
+                console.log(finalTranscript);
                 $.ajax({
-                    
+                    method: "GET",
+                    url: "/caption",
+                    data: {
+                        userDate: finalTranscript,
+                        videoId: vId
+                    },
+                    success: data=>{
+                        console.log(data);
+                    }   
                 })
             }            
         }
