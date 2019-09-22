@@ -17,24 +17,33 @@ var toString = require("nlcst-to-string");
 
 const router = Router();
 export default router;
+var url;
+let transcript;
 
 router.get("/", (req, res) => {
     res.render("index.html");
 });
-var url;
+
 router.get("/id", async (req, res)=>{
 	const id = req.query.url;
-	const transcript = await get_transcript_py(id);
+	transcript = await get_transcript_py(id);
 	res.json(transcript);
 })
-
 
 router.get("/caption", async (req, res) => {
     url = req.query.url;
     console.log(typeof(url));
+    const raw_json = get_train_data(transcript);
+    console.log(raw_json);
 });
+
 async function get_transcript_py(url){
 	const {stdout,stderr} = await exec('python ./routes/script.py '+url);
+	return stdout;
+}
+
+async function get_train_data(transcript){
+	const {stdout,stderr} = await exec('python ./routes/train.py '+url);
 	return stdout;
 }
 
