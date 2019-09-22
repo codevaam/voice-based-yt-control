@@ -18,8 +18,8 @@ router.get("/", (req, res) => {
     res.render("index.html");
 });
 
-router.get("/caption", async (req, res) => {
-    const url = req.body.url;
+router.get("/caption?:url", async (req, res) => {
+    const url = req.query.url;
     console.log(typeof(url));
     const transcript = get_transcript_py(url);
     console.log(transcript);
