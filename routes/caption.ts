@@ -19,6 +19,7 @@ const router = Router();
 export default router;
 var url;
 let transcript;
+let raw_json;
 
 router.get("/", (req, res) => {
     res.render("index.html");
@@ -26,15 +27,15 @@ router.get("/", (req, res) => {
 
 router.get("/id", async (req, res)=>{
 	const id = req.query.url;
-	transcript = await get_transcript_py(id);
+    transcript = await get_transcript_py(id);
+    raw_json = get_train_data(transcript);
+    console.log(raw_json);
 	res.json(transcript);
 })
 
 router.get("/caption", async (req, res) => {
     url = req.query.url;
     console.log(typeof(url));
-    const raw_json = get_train_data(transcript);
-    console.log(raw_json);
 });
 
 async function get_transcript_py(url){
