@@ -18,15 +18,16 @@ router.get("/", (req, res) => {
     res.render("index.html");
 });
 
-router.post("/", async (req, res) => {
-    const transcript = get_transcript_py();
+router.get("/caption", async (req, res) => {
+    const url = req.body.url;
+    console.log(typeof(url));
+    const transcript = get_transcript_py(url);
     console.log(transcript);
 	//{
 	//     duration:
 	//     text:
 	//     start:
 	// // }
-	const videoId = req.body.videoId;
     const userData = req.body.userData;
     
 
@@ -34,11 +35,12 @@ router.post("/", async (req, res) => {
 	
 });
 
-function get_transcript_py() {
-    const pyProg = spawn("python", ['./script.py','']);
+function get_transcript_py(url) {
+    const pyProg = spawn("python", ['./script.py', url]);
     pyProg.strout.on('data', function(data) {
         console.log(data.toString());
-    })
+        return data.toString();
+    });
 }
 
 async function get_label_list_2(transcriptAndKeys, userData: string) {
