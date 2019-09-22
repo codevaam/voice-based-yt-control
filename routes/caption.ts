@@ -15,7 +15,7 @@ const router = Router();
 export default router;
 
 router.get("/", (req, res) => {
-    res.render("index");
+    res.render("index.html");
 });
 
 router.post("/", async (req, res) => {

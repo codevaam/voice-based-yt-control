@@ -18,8 +18,10 @@ export const mongo_uri = "mongodb://localhost:27017/caption";
 export const connect = mongoose.connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use("/static", express.static("static"));
+// Use `.hbs` for extensions and find partials in `views/partials`.
+app.engine("html", require('ejs').renderFile);
 
-app.set("view engine", "ejs");
+app.set("view engine", "html");
 app.set("views", __dirname + "/views");
 
 app.use(logger("dev"));
