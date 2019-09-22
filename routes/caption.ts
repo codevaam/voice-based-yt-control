@@ -19,20 +19,23 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-	const transcript = req.body.transcipt;
+    const transcript = get_transcript_py();
+    console.log(transcript);
 	//{
 	//     duration:
 	//     text:
 	//     start:
-	// }
-	const url = req.body.url;
-	const userData = req.body.userData;
+	// // }
+	const videoId = req.body.videoId;
+    const userData = req.body.userData;
+    
+
 
 	
 });
 
 function get_transcript_py() {
-    const pyProg = spawn("python", ['./interface/script.py','']);
+    const pyProg = spawn("python", ['./script.py','']);
     pyProg.strout.on('data', function(data) {
         console.log(data.toString());
     })
