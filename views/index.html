@@ -8,6 +8,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
     <script>
       var player,vId="O9e-bh1PI3M";
       $(document).on("click", ".play-button", function(){
@@ -43,10 +44,17 @@
           function stopVideo() {
             player.stopVideo();
           }
+          $.ajax({
+            method: "GET",
+            url: "/id",
+            data: {
+              url: vId,
+            },
+            success: data=> {
+              // console.log(data);
+            }
+          })
         })
-        function seek(){
-            player.seekTo(10, true);
-        }
         function record(){
             window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
             let finalTranscript = '';
@@ -69,7 +77,7 @@
                 } else {
                 interimTranscript += transcript;
                 }
-                finalTranscript += ' '
+                // finalTranscript += ' '
                 console.log(finalTranscript);
                 $.ajax({
                     method: "GET",
@@ -79,31 +87,60 @@
                         videoId: vId
                     },
                     success: data=>{
-                        console.log(data);
+                      for(var i = 0;i<data.length; i++){
+                        htmlData = '<div class="m-1"><button class="btn col seek" id='+ data.timestamp +'>'+ data.text +'</button></div>'
+                        $("#transcript-result").html(htmlData);
+                      }
                     }   
                 })
             }            
         }
     }
+    $(document).on("click", ".seek", function(){
+      var seekTime = $(this).attr("id");
+      player.seekTo(seekTime, true);
+    })
     
         
     </script>
   <body>
         <div class="pt-4">
                 <div class="form-group px-5">
+                  <div class="row">
+                    <div class="ml-auto mr-auto py-2">
+                      <h1>Voice based video seeking</h1>
+                    </div>
+                  </div>
                     <input type="text" class="form-control ml-auto mr-auto row link-input" placeholder="Insert your Youtube link here">
                     <div class="row">
                         <div class="ml-auto mr-auto pt-2">
-                            <button class="btn btn-primary play-button">Play video</button>
+                            <button class="btn btn-primary play-button play-button">Play video</button>
                         </div>
                     </div>
                 </div>
         </div>
-    <div id="player" class="p-5" style="height: 800px"></div>
-    <div class="p-5" id="video">
-        <div class="ml-auto mr-auto pt-2">
-            <button class="btn btn-primary record-button" onclick="record()">Record Audio</button>
+        <div class="row no-gutters">
+          <div id="player" class="col-8 ml-3 mr-2 border border-default" style="height: 720px">
+              <div class="w-100 h-100"></div>
+          </div>
+          <div class="col mr-3 border border-default right-panel" style="height: 720px">
+              <div class="row no-gutters pt-2">
+                  <div class="ml-auto mr-auto">
+                    <button class="btn record-button" onclick="record()"><img src="/static/images/mic.png" alt="">Record</button>
+                  </div>
+                </div>
+                <hr>
+                <div class="m-2 mt-5 h-75 border border-defualt" id="transcript-result">
+                    <div class="m-1"><button class="btn col seek" id="data.timestamp"><strong>1.20 </strong><em>Transcript text</em></button></div>
+                    <div class="m-1"><button class="btn col seek" id="data.timestamp"><strong>1.20 </strong><em>Transcript text</em></button></div>
+                    <div class="m-1"><button class="btn col seek" id="data.timestamp"><strong>1.20 </strong><em>Transcript text</em></button></div>
+                    <div class="m-1"><button class="btn col seek" id="data.timestamp"><strong>1.20 </strong><em>Transcript text</em></button></div>
+                    <div class="m-1"><button class="btn col seek" id="data.timestamp"><strong>1.20 </strong><em>Transcript text</em></button></div>
+                    <div class="m-1"><button class="btn col seek" id="data.timestamp"><strong>1.20 </strong><em>Transcript text</em></button></div>
+                </div>
+          </div>
         </div>
+        
     </div>
   </body>
 </html>

@@ -1,0 +1,28 @@
+.temp-text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 40px;
+    color: gray;
+}
+
+
+
+img {
+    width: 30px;
+    height: 30px;
+}
+
+#transcript-result {
+    background-color: aliceblue;
+    overflow-y: scroll;
+}
+.seek:hover{
+    background-color: lightblue;
+}
+.seek {
+    background-color: aqua;
+}
+
+.play-button {
+    background-color: #9380ff;
+    color: black;
+}
